@@ -15,7 +15,8 @@ from matplotlib.backends.backend_gtkagg import FigureCanvasGTKAgg as FigureCanva
 from matplotlib.backends.backend_gtkagg import NavigationToolbar2GTKAgg as NavigationToolbar
 
 def aplicar(self):
-    puerto = serial.Serial('/dev/ttyACM0', baudrate=9600)
+    puertoserie = str(entry4.get_text())
+    puerto = serial.Serial(puertoserie, baudrate=9600)
 
     # Reseteo placa Arduino
     # Sólo necesario en Linux
@@ -24,11 +25,11 @@ def aplicar(self):
     puerto.flushInput()
     puerto.setDTR(True)
 
-    Fs = 200.0  # Frecuencia de muestreo
-    N = 16384  # Número de muestras
-    n = 16384.0
-    L = 256  # Longitud de los segmentos
-    l = 256.0
+    Fs = float(entry1.get_text())  # Frecuencia de muestreo
+    N = int(entry2.get_text())  # Número de muestras
+    n = float(entry2.get_text()) 
+    L = int(entry3.get_text())   # Longitud de los segmentos
+    l = float(entry3.get_text()) 
 
     data = []  # Lista contenedora del muestreo
     data_seg = numpy.zeros((N / L, L))  # Lista contenedora de los segmentos de longitud L
